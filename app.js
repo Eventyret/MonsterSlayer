@@ -11,13 +11,14 @@ new Vue({
 			this.gameIsRunning = true;
 			this.playerHealth = 100;
 			this.monsterHealth = 100;
+			this.gameLog = [];
 		},
 		attack: function() {
 			let damage = this.calculateDamage(3,10);
 			this.monsterHealth -= damage;
 			this.gameLog.unshift({
 				isPlayer: true,
-				text: 'You hit the monster for' + damage
+				text: 'You hit the monster for ' + damage
 			});
 			if (this.checkWinner()) { 
 				return;
@@ -26,13 +27,22 @@ new Vue({
 			this.monsterAttacks();
 		},
 		specialAttack: function() {
-			this.monsterHealth -= this.calculateDamage(10, 20);
+			let damage = this.calculateDamage(10, 20);
+			this.monsterHealth -= damage
+			this.gameLog.unshift({
+				isPlayer: true,
+				text: 'You hit the monster with a special attack for ' + damage
+			});
 			if(this.checkWinner()) {
 				return
 			}
 			this.monsterAttacks()
 		},
 		heal: function() {
+			this.gameLog.unshift({
+				isPlayer: true,
+				text: "You healed yourself for 10 HP"
+			})
 			if(this.playerHealth <= 90) {
 				this.playerHealth +=10;
 			} else {
@@ -42,7 +52,10 @@ new Vue({
 		},
 		giveUp: function(){
 			this.gameIsRunning = false;
-			this.playerHealth = "Dead"			
+			this.gameLog.unshift({
+				isPlayer: true,
+				text: "You gave up and died"
+			})
 		},
 		monsterAttacks: function() {
 			let damage = this.calculateDamage(5, 12);
@@ -50,7 +63,7 @@ new Vue({
 			this.checkWinner();
 			this.gameLog.unshift({
 				isPlayer: false,
-				text: 'The Monster hits you for' + damage
+				text: 'The Monster hits you for ' + damage
 			});
 		},
 		calculateDamage: function(min, max) {
