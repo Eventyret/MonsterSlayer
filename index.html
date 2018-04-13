@@ -16,7 +16,7 @@
 				class="healthbar text-center" 
 				style="background-color: green; margin: 0; color: white;"
 				:style="{width: playerHealth + '%'}">
-					 {{ playerHealth }} / HP
+					 {{ playerHealth }}
                 </div>
             </div>
         </div>
@@ -27,7 +27,7 @@
 				class="healthbar text-center" 
 				style="background-color: green; margin: 0; color: white;"
 				:style="{width: monsterHealth + '%'}">
-					{{ monsterHealth }} / HP
+					{{ monsterHealth }}
                 </div>
             </div>
         </div>
@@ -48,7 +48,9 @@
     <section class="row log" v-if="gameLog.length > 0">
         <div class="small-12 columns">
             <ul>
-                <li v-for="entry in gameLog">
+                <li 
+				v-for="entry in gameLog"
+				:class="{'player-turn': entry.isPlayer, 'monster-turn': !entry.isPlayer, 'special-attack': entry.specialAttack, 'heal': entry.heal,'dead': entry.dead}">
 					{{ entry.text }}
                 </li>
             </ul>

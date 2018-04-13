@@ -30,7 +30,7 @@ new Vue({
 			let damage = this.calculateDamage(10, 20);
 			this.monsterHealth -= damage
 			this.gameLog.unshift({
-				isPlayer: true,
+				specialAttack: true,
 				text: 'You hit the monster with a special attack for ' + damage
 			});
 			if(this.checkWinner()) {
@@ -40,7 +40,7 @@ new Vue({
 		},
 		heal: function() {
 			this.gameLog.unshift({
-				isPlayer: true,
+				heal: true,
 				text: "You healed yourself for 10 HP"
 			})
 			if(this.playerHealth <= 90) {
@@ -53,7 +53,7 @@ new Vue({
 		giveUp: function(){
 			this.gameIsRunning = false;
 			this.gameLog.unshift({
-				isPlayer: true,
+				dead: true,
 				text: "You gave up and died"
 			})
 		},
