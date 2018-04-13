@@ -1,6 +1,5 @@
 {
 	"files.associations": {
 		"*.html": "vue-html",
-		"*.js": "vue"
 	}
 }
