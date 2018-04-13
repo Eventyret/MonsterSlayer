@@ -44,6 +44,10 @@
     color: red;
     background-color: #ffc0c1;
 }
+.log ul .special-attack {
+	color: yellow;
+	background-color: #e4e8ff;
+}
 
 button {
     font-size: 20px;
